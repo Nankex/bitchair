@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bitchair.mapper.InputMapper">
+
+    <insert id="saveInput" parameterType="com.example.bitchair.entity.Input">
+        INSERT INTO
+            blockchair_bitcoin_inputs
+        VALUES
+            (#{block_id},#{transaction_hash},#{index},#{time},#{value},#{value_usd},#{recipient},#{type},#{script_hex},#{is_from_coinbase},#{is_spendable},#{spending_block_id},#{spending_transaction_hash},#{spending_index},#{spending_time},#{spending_value_usd},#{spending_sequence},#{spending_signature_hex},#{spending_witness},#{lifespan},#{cdd})
+    </insert>
+    <select id="findByThash" parameterType="String" resultType="com.example.bitchair.entity.Input">
+        SELECT
+            *
+        FROM
+            blockchair_bitcoin_inputs
+        WHERE
+            transaction_hash=#{hash}
+    </select>
+</mapper>

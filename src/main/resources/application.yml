@@ -1,0 +1,38 @@
+#端口映射
+server:
+  port: 8080
+spring:
+  # 数据库驱动连接
+  datasource:
+    #mysql8之后需要指定时区和安全连接方式
+    url: jdbc:mysql://localhost:3306/bitchain?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: wf817628
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+      #springboot 集成Swagger2启动报错 Failed to start bean ‘documentationPluginsBootstrapper’; nested exception is java.lang.NullPointerException
+      #Springboot2.6以后将SpringMVC 默认路径匹配策略从AntPathMatcher 更改为PathPatternParser，导致出错
+mybatis:
+  # mybatis配置实体类的路径
+  type-aliases-package: com.example.bitchair.entity
+  # mybatis配置mapper.xml路径
+  mapper-locations: classpath:/mapper/*.xml
+  # mybatis全局配置的路径
+  #config-location: classpath:/mybatis-config/*.xml
+
+# 定位模板的目录
+#spring.mvc.view.prefix=classpath:/templates/
+# 给返回的页面添加后缀名
+#spring.mvc.view.suffix=.html
+
+#mvc:
+#  view:
+#    prefix: /WEB-INF/
+#    suffix: .jsp
+

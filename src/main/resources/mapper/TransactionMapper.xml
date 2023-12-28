@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bitchair.mapper.TransactionMapper">
+    <select id="findAllTransaction" resultType="com.example.bitchair.entity.Transaction">
+        SELECT
+            *
+        FROM
+            blockchair_bitcoin_transactions
+    </select>
+    <select id="findTransactionById" resultType="com.example.bitchair.entity.Transaction" parameterType="String">
+        SELECT
+            *
+        FROM
+            blockchair_bitcoin_transactions
+        WHERE
+            block_id=#{id}
+    </select>
+    <select id="findByHash" resultType="com.example.bitchair.entity.Transaction" parameterType="String">
+        SELECT
+            *
+        FROM
+            blockchair_bitcoin_transactions
+        WHERE
+            hash=#{hash}
+    </select>
+    <delete id="deleteTransaction">
+        DELETE
+        FROM
+            blockchair_bitcoin_transactions_copy1
+        WHERE
+            hash=#{hash}
+    </delete>
+    <insert id="saveTransaction" parameterType="com.example.bitchair.entity.Transaction">
+        INSERT INTO
+            blockchair_bitcoin_transactions_copy1
+        VALUES
+            (#{block_id},#{hash},#{time},#{size},#{weight},#{version},#{lock_time},#{is_coinbase},#{has_witness},#{input_count},#{output_count},#{input_total},#{input_total_usd},#{output_total},#{output_total_usd},#{fee},#{fee_usd},#{fee_per_kb},#{fee_per_kb_usd},#{fee_per_kwu},#{fee_per_kwu_usd},#{cdd_total})
+    </insert>
+    <update id="updateTransaction" parameterType="com.example.bitchair.entity.Transaction">
+        UPDATE
+            blockchair_bitcoin_transactions_copy1
+        SET
+            block_id=#{block_id},hash=#{hash},time=#{time},size=#{size},weight=#{weight},version=#{version},lock_time=#{lock_time},is_coinbase=#{is_coinbase},has_witness=#{has_witness},input_count=#{input_count},output_count=#{output_count},input_total=#{input_total},input_total_usd=#{input_total_usd},output_total=#{output_total},output_total_usd=#{output_total_usd},fee=#{fee},fee_usd=#{fee_usd},fee_per_kb=#{fee_per_kb},fee_per_kb_usd=#{fee_per_kb_usd},fee_per_kwu=#{fee_per_kwu},fee_per_kwu_usd=#{fee_per_kwu_usd},cdd_total=#{cdd_total}
+        WHERE
+            id=#{id}
+    </update>
+</mapper>

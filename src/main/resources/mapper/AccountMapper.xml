@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bitchair.mapper.AccountMapper">
+
+    <insert id="saveAccount" parameterType="com.example.bitchair.entity.Account">
+        INSERT INTO
+            account
+        VALUES
+            (#{username},#{password},#{email})
+    </insert>
+
+    <select id="findByUsername" resultType="com.example.bitchair.entity.Account" parameterType="String">
+        SELECT
+            *
+        FROM
+            account
+        WHERE
+            username =#{username}
+    </select>
+
+    <update id="resetPassword" parameterType="com.example.bitchair.entity.Account">
+        UPDATE
+        account
+        SET
+        password=#{password}
+        WHERE
+        username=#{username}
+    </update>
+
+    <!--    <delete id="deleteUser">-->
+    <!--        DELETE-->
+    <!--        FROM-->
+    <!--        user-->
+    <!--        WHERE-->
+    <!--        id=#{id}-->
+    <!--    </delete>-->
+
+    <!--    <select id="listUser" resultType="com.example.demo.entity.Account">-->
+    <!--        select * from User-->
+    <!--    </select>-->
+
+
+</mapper>

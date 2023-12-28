@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bitchair.mapper.Collection_BlockMapper">
+
+    <insert id="saveCollection_Block" parameterType="com.example.bitchair.entity.Collection_Block">
+        INSERT INTO
+            collection_block
+        VALUES
+            (#{uid},#{blockid})
+    </insert>
+    <select id="findCBlockByUid" resultType="com.example.bitchair.entity.Collection_Block">
+        SELECT
+            *
+        FROM
+            collection_block
+        WHERE
+            uid=#{uid}
+    </select>
+    <delete id="deleteCBlock">
+        DELETE
+        FROM
+            collection_block
+        WHERE
+        blockid=#{blockid}
+    </delete>
+</mapper>
